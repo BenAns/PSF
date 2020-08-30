@@ -23,8 +23,9 @@ void iterateSieve(sieveData sieve, args programArgs);
 void calculateSieve(args programArgs);
 void fillOldPrimes(sieveData sieve, args programArgs);
 void getNewPrimes(sieveData* sieve, args programArgs);
-void resetStoredPrimes(sieveData sieve, args programArgs);
 
-void appendNewPrimes(uint64_t* newPrimes, const char* filename);
+void markNonPrimes(sieveData sieve, args programArgs, uint64_t newPrime, uint64_t firstIndex);
+void processNewPrimes(sieveData* sieve, args programArgs, uint64_t sieveIndex);
+void appendNewPrime(uint64_t newPrime, const char* filename);
 
 #endif
