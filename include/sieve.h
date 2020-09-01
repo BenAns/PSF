@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "args.h"
+#include "fileOps.h"
 
 // Header file to declare functions to do with the sieve calculations
 
@@ -26,6 +27,5 @@ void getNewPrimes(sieveData* sieve, args programArgs);
 
 void markNonPrimes(sieveData sieve, args programArgs, uint64_t newPrime, uint64_t firstIndex);
 void processNewPrimes(sieveData* sieve, args programArgs, uint64_t sieveIndex);
-void appendNewPrime(uint64_t newPrime, const char* filename);
 
 #endif
