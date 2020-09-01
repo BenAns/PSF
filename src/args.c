@@ -5,5 +5,5 @@
 args processArgs(int argc, char* argv[])
 {
 	//return (args){(uint64_t)1 << 24, (uint64_t)1 << 24, "primes.txt", 8};
-	return (args) {(uint64_t)1 << 4, (uint64_t)1 << 4, "primes.txt", 4};
+	return (args) {(uint64_t)1 << 4, (uint64_t)1 << 4, (uint64_t) 4, "primes.txt", 4};
 }

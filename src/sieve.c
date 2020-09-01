@@ -16,8 +16,10 @@ sieveData allocateSieve(args programArgs)
 	sieveData sieve;
 	sieve.sieveMem = calloc(programArgs.sieveSize, 1);
 	sieve.storedPrimes = calloc(programArgs.memPrimes, 1);
+	sieve.primesToWrite = calloc(programArgs.memPrimes, 1);
 	sieve.sieveOffset = 0;
 	sieve.primesFound = 0;
+	sieve.numNewPrimes = 0;
 
 	return sieve;
 }
@@ -39,8 +41,10 @@ void iterateSieve(sieveData sieve, args programArgs)
 		getNewPrimes(&sieve, programArgs);
 
 		// Prepares for the next iteration of the table
+		appendNewPrimes(sieve.primesToWrite, sieve.numNewPrimes % programArgs.fileWritePrimes, programArgs.filename);
 		memset(sieve.sieveMem, 0, programArgs.sieveSize);
 		sieve.sieveOffset++;
+		sieve.numNewPrimes = 0;
 	}
 }
 
@@ -101,8 +105,14 @@ void processNewPrimes(sieveData* sieve, args programArgs, uint64_t sieveIndex)
 		{
 			sieve->storedPrimes[sieve->primesFound++ % programArgs.memPrimes / sizeof(uint64_t)] = currentNum;
 			markNonPrimes(*sieve, programArgs, currentNum, currentNum - programArgs.sieveSize * sieve->sieveOffset * 8);
-			appendNewPrime(currentNum, programArgs.filename);
+			// appendNewPrime(currentNum, programArgs.filename);
 			newPrimes = sieve->sieveMem[sieveIndex];
+
+			sieve->primesToWrite[sieve->numNewPrimes++ % programArgs.fileWritePrimes] = currentNum;
+			if(sieve->numNewPrimes % programArgs.fileWritePrimes == 0)
+			{
+				appendNewPrimes(sieve->primesToWrite, programArgs.fileWritePrimes, programArgs.filename);
+			}
 		}
 
 		currentNum++;

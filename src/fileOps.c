@@ -2,14 +2,12 @@
 
 // File to implement subroutiunes to do with file operations
 
-// Appends a new prime to the end of a file
-void appendNewPrime(uint64_t newPrime, const char* filename)
+// Append a new primes to the end of a file
+void appendNewPrimes(uint64_t* newPrimes, uint64_t numNewPrimes, const char* filename)
 {
 	FILE* file = openFileSafe(filename, "ab");
-	fwrite(&newPrime, sizeof(uint64_t), 1, file);
+	fwrite(newPrimes, sizeof(uint64_t), numNewPrimes, file);
 	fclose(file);
-
-	printf("%" PRIu64 "\n", newPrime);
 }
 
 // Changes the current primes stored in memory
