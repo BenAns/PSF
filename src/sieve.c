@@ -5,6 +5,7 @@
 // Calculates the sieve processes from a high level
 void calculateSieve(args programArgs)
 {
+	clearFile(programArgs.filename);
 	sieveData sieve = allocateSieve(programArgs);
 	iterateSieve(sieve, programArgs);
 	deallocateSieve(sieve);
@@ -15,8 +16,8 @@ sieveData allocateSieve(args programArgs)
 {
 	sieveData sieve;
 	sieve.sieveMem = calloc(programArgs.sieveSize, 1);
-	sieve.storedPrimes = calloc(programArgs.memPrimes, 1);
-	sieve.primesToWrite = calloc(programArgs.memPrimes, 1);
+	sieve.storedPrimes = calloc(programArgs.memPrimes, sizeof(uint64_t));
+	sieve.primesToWrite = calloc(programArgs.fileWritePrimes, sizeof(uint64_t));
 	sieve.sieveOffset = 0;
 	sieve.primesFound = 0;
 	sieve.numNewPrimes = 0;

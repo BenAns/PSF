@@ -1,9 +1,13 @@
 #ifndef ARGS
 #define ARGS
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #include <inttypes.h>
+#include <limits.h>
 
-// Header file to declare subroutines to do with processing the arguments
+// Header file to declare subroutines and constants to do with processing the program arguments
 
 typedef struct ARGS
 {
@@ -14,6 +18,15 @@ typedef struct ARGS
 	uint64_t sieveIterations;  // Numbers of iterations (to fill the sieve memory each time) to be performed
 } args;
 
+extern const char* helpscreen;
+
 args processArgs(int argc, char* argv[]);
+
+void checkValidArgs(int argc, char* argv[]);
+void parseArgs(int argc, char* argv[], args* progArgs);
+void parseArgPair(char* argType, char* argVal, args* progArgs);
+uint64_t getArgSize(char* argVal);
+uint64_t getMultiplier(char* argVal);
+void printHelp(const char* errorInfo, const char* errorArg); 
 
 #endif

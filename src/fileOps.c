@@ -2,6 +2,12 @@
 
 // File to implement subroutiunes to do with file operations
 
+// Clears the contents of a file
+void clearFile(const char* filename)
+{
+	fclose(openFileSafe(filename, "wb"));
+}
+
 // Append a new primes to the end of a file
 void appendNewPrimes(uint64_t* newPrimes, uint64_t numNewPrimes, const char* filename)
 {
